@@ -37,5 +37,64 @@ namespace ServiciosWeb.WebApi.Controllers
                 return gestor;
             }
         }
+        [HttpPost]
+        public bool Post(gestores_Bd gestores)
+        {
+            bool rpta = false;
+            try
+            {
+                using(var db = new gestoresEntities())
+                {
+                    db.gestores_Bd.Add(gestores);
+                    rpta = db.SaveChanges() > 0;
+                }
+            }
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return rpta;
+        }
+        [HttpPut]
+        public bool Put(gestores_Bd gestores)
+        {
+            bool rpta = false;
+            try
+            {
+                using(var db = new gestoresEntities())
+                {
+                    var gestorupdate = db.gestores_Bd.FirstOrDefault(x => x.id == gestores.id);
+                    gestorupdate.id = gestores.id;
+                    gestorupdate.nombre = gestores.nombre;
+                    gestorupdate.lanzamiento = gestores.lanzamiento;
+                    gestorupdate.desarrollador = gestores.desarrollador;
+                    rpta = db.SaveChanges() > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return rpta;
+        }
+        [HttpDelete]
+        public bool Delete(int id)
+        {
+            bool rpta = false;
+            try
+            {
+                using(var db = new gestoresEntities())
+                {
+                    var gestordelete = db.gestores_Bd.FirstOrDefault(x => x.id == id);
+                    db.gestores_Bd.Remove(gestordelete);
+                    rpta = db.SaveChanges() > 0;
+                }
+            }
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return rpta;
+        }
     }
 }

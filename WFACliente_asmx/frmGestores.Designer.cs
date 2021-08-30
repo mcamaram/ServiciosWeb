@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvGestores = new System.Windows.Forms.DataGridView();
             this.txtFiltro = new System.Windows.Forms.TextBox();
             this.btnNuevo = new System.Windows.Forms.Button();
@@ -39,6 +40,8 @@
             // 
             // dgvGestores
             // 
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.MediumSeaGreen;
+            this.dgvGestores.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvGestores.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvGestores.Location = new System.Drawing.Point(21, 54);
             this.dgvGestores.Name = "dgvGestores";
