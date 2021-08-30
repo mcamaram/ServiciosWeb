@@ -37,6 +37,11 @@ namespace ServiciosWeb.WebApi.Controllers
                 return gestor;
             }
         }
+        /// <summary>
+        /// Metodo para insertar un registro en la tabla gestores
+        /// </summary>
+        /// <param name="gestores"></param>
+        /// <returns></returns>
         [HttpPost]
         public bool Post(gestores_Bd gestores)
         {
@@ -55,6 +60,11 @@ namespace ServiciosWeb.WebApi.Controllers
             }
             return rpta;
         }
+        /// <summary>
+        /// Metdodo para actualizar los datos de la tabla gestores
+        /// </summary>
+        /// <param name="gestores"></param>
+        /// <returns></returns>
         [HttpPut]
         public bool Put(gestores_Bd gestores)
         {
@@ -77,6 +87,11 @@ namespace ServiciosWeb.WebApi.Controllers
             }
             return rpta;
         }
+        /// <summary>
+        /// Metodo para eliminar un registro de la tabla
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete]
         public bool Delete(int id)
         {
