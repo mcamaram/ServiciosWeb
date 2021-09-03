@@ -59,5 +59,109 @@ namespace ServiciosWeb.ServicioWFC2
             }
             return lstGestores;
         }
+
+        public bool Post(gestores_Bd gestores)
+        {
+            bool rpta = false;
+            try
+            {
+                using(var db = new gestoresEntities())
+                {
+                    db.gestores_Bd.Add(gestores);
+                    rpta = db.SaveChanges() > 0;
+                }
+            }
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return rpta;
+        }
+
+        public bool Put(gestores_Bd gestor)
+        {
+            bool rpta = false;
+            try
+            {
+                using(var db = new gestoresEntities())
+                {
+                    var gestorupdate = db.gestores_Bd.FirstOrDefault(x => x.id == gestor.id);
+                    gestor.id = gestorupdate.id;
+                    gestor.nombre = gestorupdate.nombre;
+                    gestor.lanzamiento = gestorupdate.lanzamiento;
+                    gestor.desarrollador = gestorupdate.desarrollador;
+                    rpta = db.SaveChanges() > 0;
+                }
+            }
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return rpta;
+        }
+
+        public bool Delete(int id)
+        {
+            bool rpta = false;
+            try
+            {
+                using(var db = new gestoresEntities())
+                {
+                    var gestordelete = db.gestores_Bd.FirstOrDefault(x => x.id == id);
+                    db.gestores_Bd.Remove(gestordelete);
+                    rpta = db.SaveChanges() > 0;
+                }
+            }
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return rpta;
+        }
+
+        public bool Post(Gestores gestores)
+        {
+            bool rpta = false;
+            gestores_Bd gestor = new gestores_Bd();
+            try
+            {
+                using (var db = new gestoresEntities())
+                {
+                    gestor.id = gestores.id;
+                    gestor.nombre = gestores.nombre;
+                    gestor.lanzamiento = gestores.lanzamiento;
+                    gestor.desarrollador = gestores.desarrollador;
+                    db.gestores_Bd.Add(gestor);
+                    rpta = db.SaveChanges() > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return rpta;
+        }
+
+        public bool Put(Gestores gestor)
+        {
+            bool rpta = false;
+            try
+            {
+                using (var db = new gestoresEntities())
+                {
+                    var gestorupdate = db.gestores_Bd.FirstOrDefault(x => x.id == gestor.id);
+                    gestor.id = gestorupdate.id;
+                    gestor.nombre = gestorupdate.nombre;
+                    gestor.lanzamiento = gestorupdate.lanzamiento;
+                    gestor.desarrollador = gestorupdate.desarrollador;
+                    rpta = db.SaveChanges() > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return rpta;
+        }
     }
 }

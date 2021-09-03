@@ -14,7 +14,7 @@ namespace ServiciosWeb.ServicioWFC2.Models
         [DataMember(Order = 1)]
         public string nombre { get; set; }
         [DataMember(Order = 2)]
-        public int lanzamiento { get; set; }
+        public int? lanzamiento { get; set; }
         [DataMember(Order = 3)]
         public string desarrollador { get; set; }
     }

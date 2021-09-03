@@ -31,5 +31,10 @@ namespace WFACliente_asmx
                 txtId.Text = Id.ToString();
             }
         }
+
+        private void btnGuardar_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

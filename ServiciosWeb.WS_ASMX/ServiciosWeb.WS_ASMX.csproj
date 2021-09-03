@@ -87,6 +87,7 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Clases\GestorCLS.cs" />
     <Compile Include="GestoresService.asmx.cs">
       <DependentUpon>GestoresService.asmx</DependentUpon>
       <SubType>Component</SubType>

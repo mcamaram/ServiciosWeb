@@ -18,6 +18,12 @@ namespace ServiciosWeb.ServicioWFC2
         Gestores GetGestor(int id);
         [OperationContract]
         List<Gestores> GetGestores();
+        [OperationContract]
+        bool Post(Gestores gestores);
+        [OperationContract]
+        bool Put(Gestores gestor);
+        [OperationContract]
+        bool Delete(int id);
 
         // TODO: agregue aquí sus operaciones de servicio
     }

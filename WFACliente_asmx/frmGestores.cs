@@ -31,7 +31,7 @@ namespace WFACliente_asmx
 
         private void LoadDataWSWFC()
         {
-            System.Net.ServicePointManager.ServerCertificateValidationCallback = new System.Net.Security.RemoteCertificateValidationCallback(remove);
+            System.Net.ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback(remove);
             Service1Client clienteWCF = new Service1Client();
             var gestores2 = clienteWCF.GetGestores();
             dgvGestores.DataSource = gestores2;

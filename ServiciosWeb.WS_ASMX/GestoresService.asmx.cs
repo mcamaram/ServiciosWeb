@@ -1,4 +1,5 @@
 ﻿using ServiciosWeb.Data.Models;
+using ServiciosWeb.WS_ASMX.Clases;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,23 +20,120 @@ namespace ServiciosWeb.WS_ASMX
     {
 
         [WebMethod]
-        public List<gestores_Bd> GetAllGestores()
+        public List<GestorCLS> GetAllGestores()
         {
-            using(var db = new gestoresEntities())
+            var lstgestores = new List<GestorCLS>();
+            try
             {
-                var listado = db.gestores_Bd.ToList();
-                return listado;
+                using (var db = new gestoresEntities())
+                {
+                    lstgestores = (from gestores in db.gestores_Bd
+                                   select new GestorCLS
+                                   {
+                                       Id = gestores.id,
+                                       Nombre = gestores.nombre,
+                                       Lanzamiento = gestores.lanzamiento,
+                                       Desarrollador = gestores.desarrollador
+                                   }).ToList();
+                }
             }
+            catch(Exception ex)
+            {
+                lstgestores = null;
+            }
+            return lstgestores;
         }
 
         [WebMethod]
-        public gestores_Bd GetGestor(int id)
+        public GestorCLS GetGestor(int id)
         {
-            using (var db = new gestoresEntities())
+            var objGestor = new GestorCLS();
+            try
             {
-                var gestor = db.gestores_Bd.FirstOrDefault(x => x.id == id);
-                return gestor;
+                using (var db = new gestoresEntities())
+                {
+                    var gestor = db.gestores_Bd.FirstOrDefault(x => x.id == id);
+                    objGestor.Id = gestor.id;
+                    objGestor.Nombre = gestor.nombre;
+                    objGestor.Lanzamiento = gestor.lanzamiento;
+                    objGestor.Desarrollador = gestor.desarrollador;
+                }
             }
+            catch(Exception ex)
+            {
+                objGestor = null;
+            }
+            return objGestor;
         }
+
+        [WebMethod]
+        public bool Post(GestorCLS gestores)
+        {
+            bool rpta = false;
+            try
+            {
+                using (var db = new gestoresEntities())
+                {
+                    gestores_Bd gestoresdb = new gestores_Bd();
+                    gestoresdb.nombre = gestores.Nombre;
+                    gestoresdb.lanzamiento = gestores.Lanzamiento;
+                    gestoresdb.desarrollador = gestores.Desarrollador;
+                    db.gestores_Bd.Add(gestoresdb);
+                    rpta = db.SaveChanges() > 0;
+                }
+            }
+            catch(Exception ex)
+            {
+                rpta = false;
+                throw new Exception(ex.Message);
+            }
+            return rpta;
+        }
+
+        [WebMethod]
+        public bool Put(GestorCLS gestores)
+        {
+            bool rpta = false;
+            try
+            {
+                using (var db = new gestoresEntities())
+                {
+                    gestores_Bd objgestoresDB = db.gestores_Bd.Where(x => x.id == gestores.Id).First();
+                    objgestoresDB.id = gestores.Id;
+                    objgestoresDB.nombre = gestores.Nombre;
+                    objgestoresDB.lanzamiento = gestores.Lanzamiento;
+                    objgestoresDB.desarrollador = gestores.Desarrollador;
+                    rpta = db.SaveChanges() > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                rpta = false;
+                throw new Exception(ex.Message);
+            }
+            return rpta;
+        }
+
+        [WebMethod]
+        public bool Delete(int id)
+        {
+            bool rpta = false;
+            try
+            {
+                using (var db = new gestoresEntities())
+                {
+                    gestores_Bd objgestoresDB = db.gestores_Bd.Where(x => x.id == id).First();
+                    db.gestores_Bd.Remove(objgestoresDB);
+                    rpta = db.SaveChanges() > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                rpta = false;
+                throw new Exception(ex.Message);
+            }
+            return rpta;
+        }
+
     }
 }
